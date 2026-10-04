@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Dots" />
+    <title>Dots</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="setup-screen" class="screen is-hidden" aria-labelledby="setup-title">
+        <div class="top-bar">
+          <span class="app-mark">Dots</span>
+        </div>
+
+        <div class="setup-panel">
+          <h1 id="setup-title">Новая цель</h1>
+          <form id="setup-form" class="form">
+            <label class="field">
+              <span>Название</span>
+              <input id="goal-title-input" type="text" maxlength="40" placeholder="Например: Английский" required />
+            </label>
+
+            <label class="field">
+              <span>Сколько часов нужно</span>
+              <input id="goal-total-input" type="number" min="1" max="10000" step="1" inputmode="numeric" placeholder="100" required />
+            </label>
+
+            <button class="primary-button" type="submit">Создать</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="main-screen" class="screen is-hidden" aria-labelledby="goal-title">
+        <header class="main-header">
+          <div>
+            <p class="label">Цель</p>
+            <h1 id="goal-title"></h1>
+          </div>
+          <button id="settings-button" class="icon-button" type="button" aria-label="Настройки">⋯</button>
+        </header>
+
+        <section class="progress-summary" aria-label="Прогресс">
+          <div class="progress-copy">
+            <p class="label">Прогресс</p>
+            <p id="progress-percent" class="percent">0%</p>
+            <p id="progress-hours" class="muted">0 / 0 часов</p>
+          </div>
+          <div id="today-status" class="today-pill">Сегодня 0 ч</div>
+        </section>
+
+        <section class="dots-wrap" aria-label="Точки прогресса">
+          <div id="dots-grid" class="dots-grid"></div>
+        </section>
+
+        <button id="add-button" class="add-button" type="button" aria-label="Добавить часы">+</button>
+      </section>
+    </main>
+
+    <dialog id="hours-dialog" class="dialog">
+      <form id="hours-form" method="dialog" class="dialog-box">
+        <div class="dialog-header">
+          <h2>Сегодня</h2>
+          <button class="text-button" type="button" data-close-dialog>Закрыть</button>
+        </div>
+        <label class="field">
+          <span>Сколько часов сделал</span>
+          <input id="today-hours-input" type="number" min="0" max="23" step="1" inputmode="numeric" required />
+        </label>
+        <button class="primary-button" type="submit">Сохранить</button>
+      </form>
+    </dialog>
+
+    <dialog id="settings-dialog" class="dialog">
+      <form id="settings-form" method="dialog" class="dialog-box">
+        <div class="dialog-header">
+          <h2>Настройки</h2>
+          <button class="text-button" type="button" data-close-dialog>Закрыть</button>
+        </div>
+        <label class="field">
+          <span>Название</span>
+          <input id="settings-title-input" type="text" maxlength="40" required />
+        </label>
+        <label class="field">
+          <span>Всего часов</span>
+          <input id="settings-total-input" type="number" min="1" max="10000" step="1" inputmode="numeric" required />
+        </label>
+        <button class="primary-button" type="submit">Сохранить</button>
+        <button id="reset-button" class="danger-button" type="button">Сбросить цель</button>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
