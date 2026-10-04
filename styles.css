@@ -294,7 +294,7 @@ h2 {
 .add-button {
   position: fixed;
   left: 50%;
-  bottom: calc(22px + var(--safe-bottom));
+  bottom: calc(10px + var(--safe-bottom));
   transform: translateX(-50%);
   width: 64px;
   height: 64px;
