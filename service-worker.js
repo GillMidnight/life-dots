@@ -1,4 +1,4 @@
-const CACHE_NAME = "life-dots-cache-v1";
+const CACHE_NAME = "life-dots-cache-v2";
 const APP_ASSETS = [
   "./",
   "./index.html",

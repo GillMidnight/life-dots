@@ -28,6 +28,8 @@ const settingsTitleInput = document.querySelector("#settings-title-input");
 const settingsTotalInput = document.querySelector("#settings-total-input");
 const resetButton = document.querySelector("#reset-button");
 
+populateHoursSelect();
+
 setupForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -52,7 +54,7 @@ setupForm.addEventListener("submit", (event) => {
 addButton.addEventListener("click", () => {
   todayHoursInput.value = getTodayHours();
   showDialog(hoursDialog);
-  setTimeout(() => todayHoursInput.select(), 50);
+  setTimeout(() => todayHoursInput.focus(), 50);
 });
 
 hoursForm.addEventListener("submit", (event) => {
@@ -109,6 +111,18 @@ if ("serviceWorker" in navigator) {
 }
 
 render();
+
+function populateHoursSelect() {
+  const fragment = document.createDocumentFragment();
+  for (let hour = 0; hour <= 23; hour += 1) {
+    const option = document.createElement("option");
+    option.value = String(hour);
+    option.textContent = `${hour} ч`;
+    fragment.append(option);
+  }
+
+  todayHoursInput.append(fragment);
+}
 
 function render() {
   if (!state.goal) {

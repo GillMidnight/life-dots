@@ -33,7 +33,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -42,16 +43,16 @@ button {
 }
 
 .app-shell {
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   width: min(100%, 480px);
   margin: 0 auto;
-  padding: 22px 18px calc(104px + var(--safe-bottom));
+  padding: 22px 18px calc(92px + var(--safe-bottom));
+  overflow: hidden;
 }
 
 .screen {
-  min-height: calc(100vh - 36px);
-  min-height: calc(100dvh - 36px);
+  height: 100%;
 }
 
 .is-hidden {
@@ -132,8 +133,25 @@ h2 {
   font-size: 16px;
 }
 
-.field input:focus {
+.field input:focus,
+.field select:focus {
   border-color: var(--text);
+}
+
+.field select {
+  width: 100%;
+  min-height: 118px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #101010;
+  color: var(--text);
+  outline: none;
+  padding: 0 15px;
+  font-size: 42px;
+  font-weight: 850;
+  text-align: center;
+  text-align-last: center;
+  appearance: auto;
 }
 
 .primary-button,
@@ -164,7 +182,16 @@ h2 {
 }
 
 .main-header {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
   padding-top: 2px;
+}
+
+#main-screen {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .icon-button {
@@ -181,6 +208,7 @@ h2 {
 }
 
 .progress-summary {
+  flex: 0 0 auto;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: end;
@@ -221,8 +249,20 @@ h2 {
 }
 
 .dots-wrap {
-  min-height: 260px;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-right: -10px;
   padding-top: 2px;
+  padding-right: 10px;
+  padding-bottom: 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.dots-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .dots-grid {
