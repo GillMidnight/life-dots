@@ -1,4 +1,4 @@
-const CACHE_NAME = "life-dots-cache-v4";
+const CACHE_NAME = "life-dots-cache-v5";
 const APP_ASSETS = [
   "./",
   "./index.html",
@@ -34,7 +34,19 @@ self.addEventListener("fetch", (event) => {
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
+      if (cachedResponse) return cachedResponse;
+
+      return fetch(event.request)
+        .then((networkResponse) => {
+          return networkResponse;
+        })
+        .catch(() => {
+          if (event.request.mode === "navigate") {
+            return caches.match("./index.html");
+          }
+
+          return caches.match("./");
+        });
     }),
   );
 });
